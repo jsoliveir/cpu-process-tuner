@@ -1,5 +1,6 @@
 
 Function Set-ProcessRules{
+    [CmdletBinding()]
     param([Parameter(Mandatory = $true, ValueFromPipeline = $true)] $rules)
 
     BEGIN {
@@ -8,7 +9,7 @@ Function Set-ProcessRules{
 
     PROCESS{
         foreach($r in $rules){
-            $r
+            $r | Select *
             $process =  (Get-Process | Where-Object Path -match $r.Selector);
             $process | Foreach-Object {
                 try{
@@ -19,10 +20,12 @@ Function Set-ProcessRules{
             }
         }     
     }
+
     END {
         Get-Process | Select-Object `
-        @{n="Process"; e={$_.Name}}, `
+        @{n="Process"; e={$_.ProcessNAme}}, `
         @{n="Priority"; e={$_.PriorityClass}},  `
-        @{n="Affinity"; e={[cores][int]$_.ProcessorAffinity}}
+        @{n="Affinity"; e={[cores][int]$_.ProcessorAffinity}} `
+        | Format-Table
     }
 }
