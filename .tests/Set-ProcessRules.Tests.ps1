@@ -11,8 +11,9 @@ Describe "Get-ProcessRules" {
                 CpuAffinity = [cores]::Core1
             })
         }
-
-      $global:process = Start-Process notepad `
+        
+      $global:openedAlready = @(Get-Process $(Get-ProcessRules).Selector)
+      $global:process = Start-Process (Get-ProcessRules).Selector `
         -PassThru -WindowStyle Hidden
     }
 
@@ -25,6 +26,10 @@ Describe "Get-ProcessRules" {
             Get-ProcessRules | Set-ProcessRules
             $global:process.PriorityClass | Should Be "Idle"
             $global:process.ProcessorAffinity | Should Be $([int][cores]::Core1)
+        }
+        It "should_affect_only_one" {
+            (@(Get-ProcessRules | Set-ProcessRules).Count -$global:openedAlready.Count) `
+                | Should BeExactly 1
         }
     }
    
