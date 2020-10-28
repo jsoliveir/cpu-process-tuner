@@ -10,7 +10,9 @@ Function Set-ProcessRules{
     PROCESS{
         foreach($r in $rules){
             $r | Select-Object *
-            $process =  (Get-Process | Where-Object Path -match $r.Selector);
+            $process =  (Get-Process `
+            | Where-Object Path  -NotMatch "powershell" `
+            | Where-Object Path -match $r.Selector);
             $process | Foreach-Object {
                 try{
                     $_.ProcessorAffinity = [int][cores]$r.CpuAffinity

@@ -1,7 +1,7 @@
 [
   {
     "Selector": "(.*)",
-    "CpuAffinity": [ 1,2 ],
+    "CpuAffinity": [ 1, 2 ],
     "CpuPriority": "Normal"
   },
   {
