@@ -11,9 +11,4 @@ $Scripts | Sort-Object -Property Basename | Foreach-Object{
 
 Set-Variable -Name "RulesPath" -Scope Global -Value "$PSScriptRoot\Rules"
 
-Get-Process powershell | ForEach-Object {
-    $_.ProcessorAffinity = 255
-    $_.PriorityClass = "High"
-}
-
 Export-ModuleMember -Function $Public.Basename
