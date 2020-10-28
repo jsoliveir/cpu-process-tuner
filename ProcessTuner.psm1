@@ -1,5 +1,5 @@
-$Public =  @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
-$Private =  @( Get-ChildItem -Path $PSScriptRoot\PRivate\*.ps1 -ErrorAction SilentlyContinue )
+$Public =  @( Get-ChildItem -Path $PSScriptRoot\.src\Public\*.ps1 -ErrorAction SilentlyContinue )
+$Private =  @( Get-ChildItem -Path $PSScriptRoot\.src\Private\*.ps1 -ErrorAction SilentlyContinue )
 
 Write-Host -ForegroundColor cyan "Importing Process Tuner ..."
 $Public | Sort-Object -Property Basename | Foreach-Object{

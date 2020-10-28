@@ -1,8 +1,10 @@
 
 Function Get-ProcessRules{
+    param([Parameter(Mandatory=$false)] $Path 
+        = $(Get-Variable RulesPath).Value)
     $rules =  (
         Get-ChildItem `
-            -Recurse $(Get-Variable RulesPath).Value `
+            -Recurse $Path `
             -Filter *.json
     ) | Get-Content | ConvertFrom-Json
 
