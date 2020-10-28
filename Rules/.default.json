@@ -6,7 +6,7 @@
   },
   {
     "Selector": "system32",
-    "CpuAffinity": [ 1, 2, 3, 4 ],
+    "CpuAffinity": [ 1, 2, 3 ],
     "CpuPriority": "Normal"
   },
   {
