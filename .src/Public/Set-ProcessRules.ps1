@@ -9,7 +9,7 @@ Function Set-ProcessRules{
 
     PROCESS{
         foreach($r in $rules){
-            $r | Select *
+            $r | Select-Object *
             $process =  (Get-Process | Where-Object Path -match $r.Selector);
             $process | Foreach-Object {
                 try{

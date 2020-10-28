@@ -11,7 +11,7 @@ Function Get-ProcessRules{
     foreach($r in $rules){
         $affinity = ($r.CpuAffinity | Select-Object @{
             n="affinity"
-            e={[cores][int]$_}
+            e={[cores]"Core$_" }
         }).affinity
        
        #validate affinities
