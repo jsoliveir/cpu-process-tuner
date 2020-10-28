@@ -1,0 +1,32 @@
+[
+  {
+    "Selector": "(.*)",
+    "CpuAffinity": [ 1,2 ],
+    "CpuPriority": "Normal"
+  },
+  {
+    "Selector": "system32",
+    "CpuAffinity": [ 2, 3 ],
+    "CpuPriority": "Normal"
+  },
+  {
+    "Selector": "(svhost|conhost)",
+    "CpuAffinity": [ 3, 4, 5 ],
+    "CpuPriority": "High"
+  },
+  {
+    "Selector": "slack",
+    "CpuAffinity": [ 4,5 ],
+    "CpuPriority": "High"
+  },
+  {
+    "Selector": "(msedge.exe|powershell|devenv|code|node)",
+    "CpuAffinity": [ 5, 6, 7, 8 ],
+    "CpuPriority": "High"
+  },
+  {
+    "Selector": "Microsoft Office",
+    "CpuAffinity": [ 5, 6 ],
+    "CpuPriority": "High"
+  }
+]
