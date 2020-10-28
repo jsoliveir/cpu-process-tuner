@@ -4,12 +4,11 @@ Function Set-ProcessRules{
 
     BEGIN {
         Write-Host "Setting rules ..."
-        $processes =  Get-Process
     }
 
     PROCESS{
         foreach($r in $rules){
-            $process =  ($processes | Where-Object Path -match $r.Selector);
+            $process =  (Get-Process | Where-Object Path -match $r.Selector);
             $process | Foreach-Object {
                 try{
                     $_.ProcessorAffinity = [int][cores]$r.CpuAffinity
