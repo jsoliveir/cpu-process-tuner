@@ -20,7 +20,7 @@
     "CpuPriority": "High"
   },
   {
-    "Selector": "(msedge|devenv|code|node)",
+    "Selector": "(chrome|msedge|devenv|code|node)",
     "CpuAffinity": [ 5, 6, 7, 8 ],
     "CpuPriority": "High"
   },
