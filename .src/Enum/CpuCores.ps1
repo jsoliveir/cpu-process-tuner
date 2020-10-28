@@ -7,4 +7,5 @@
     Core6 = 0x0020
     Core7 = 0x0040
     Core8 = 0x0080
+    All   = 0x0255
   }

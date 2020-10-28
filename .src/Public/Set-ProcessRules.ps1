@@ -9,16 +9,17 @@ Function Set-ProcessRules{
             $process | Foreach-Object {
                 try{
                     $_.ProcessorAffinity = [int][cores]$r.CpuAffinity
-                    $_.PriorityClass = [string]$r.CpuPriority
-                    $_ | Select-Object `
-                        @{n="Process"; e={$_.Name}}, `
-                        @{n="Rule"; e={$r.Selector}}, `
-                        @{n="Affinity"; e={$_.ProcessorAffinity}}, `
-                        @{n="Priority"; e={$_.PriorityClass}}
+                    $_.PriorityClass = [string]$r.CpuPriority                
                 }catch{
-                    Write-Warning $_.Exception.Message
                 }
             }
-        }
+        }     
+    }
+    
+    END {
+        Get-Process | Select-Object `
+        @{n="Process"; e={$_.Name}}, `
+        @{n="Affinity"; e={[cores][int]$_.ProcessorAffinity}}, `
+        @{n="Priority"; e={$_.PriorityClass}}
     }
 }
