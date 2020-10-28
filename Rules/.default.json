@@ -16,7 +16,7 @@
   },
   {
     "Selector": "slack",
-    "CpuAffinity": [ 4,5 ],
+    "CpuAffinity": [ 4, 5 ],
     "CpuPriority": "High"
   },
   {
