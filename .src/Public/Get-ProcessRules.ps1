@@ -15,11 +15,11 @@ Function Get-ProcessRules{
         }).affinity
        
        #validate affinities
-       [int][cores]$affinity | Out-Null
+       [int][cores]$affinity | Out-Null 
 
        $r.CpuAffinity = $affinity
        $r.CpuPriority = [priority]$r.CpuPriority
     }
     
-    return $rules | Sort-Object { $_.Selector.Length } 
+    return $rules
 }

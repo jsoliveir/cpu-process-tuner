@@ -13,8 +13,8 @@ Function Set-ProcessRules{
                     $_ | Select-Object `
                         @{n="Process"; e={$_.Name}}, `
                         @{n="Rule"; e={$r.Selector}}, `
-                        @{n="Affinity"; e={$r.CpuAffinity}}, `
-                        @{n="Priority"; e={$r.CpuPriority}}
+                        @{n="Affinity"; e={$_.ProcessorAffinity}}, `
+                        @{n="Priority"; e={$_.PriorityClass}}
                 }catch{
                     Write-Warning $_.Exception.Message
                 }
