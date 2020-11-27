@@ -1,32 +1,31 @@
 [
   {
     "Selector": "(.*)",
-    "CpuAffinity": [ 1, 2 ],
+    "CpuAffinity": [ 0, 1 ],
     "CpuPriority": "Normal"
   },
   {
     "Selector": "system32",
-    "CpuAffinity": [ 1, 2, 3 ],
     "CpuPriority": "Normal"
   },
   {
-    "Selector": "(svhost|conhost|explorer)",
-    "CpuAffinity": [ 1, 2, 3, 4 ],
+    "Selector": "(svhost|conhost)",
+    "CpuAffinity": [ 2, 3 ],
     "CpuPriority": "High"
   },
   {
     "Selector": "slack",
-    "CpuAffinity": [ 7, 8 ],
+    "CpuAffinity": [ 6, 7 ],
     "CpuPriority": "High"
   },
   {
-    "Selector": "(chrome|msedge|devenv|code|node|taskmgr)",
-    "CpuAffinity": [ 5, 6, 7, 8 ],
+    "Selector": "(chrome|msedge|devenv|code|node|taskmgr|explorer)",
+    "CpuAffinity": [ 4, 5, 6, 7 ],
     "CpuPriority": "High"
   },
   {
     "Selector": "Microsoft Office",
-    "CpuAffinity": [ 5, 6 ],
+    "CpuAffinity": [ 4, 5 ],
     "CpuPriority": "High"
   }
 ]
