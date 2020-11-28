@@ -1,7 +1,6 @@
 
 Function Get-ProcessRules{
-    param([Parameter(Mandatory=$false)] $Path 
-        = $(Get-Variable RulesPath).Value)
+    param([Parameter(Mandatory=$false)] $Path = (Get-Location))
     $rules =  (
         Get-ChildItem `
             -Recurse $Path `

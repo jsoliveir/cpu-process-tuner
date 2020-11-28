@@ -5,9 +5,9 @@ Function Set-ProcessRules{
 
     BEGIN{
         Write-Host -ForegroundColor Magenta "Loading rules ..."
-        $global:PROCESSES =  (Get-Process | Where-Object Path  -NotMatch "powershell");
+        $global:PROCESSES =  (Get-Process | Where-Object Path  -notMatch "powershell|pwsh");
 
-        Get-Process powershell | ForEach-Object {
+        Get-Process | Where-Object Name -match "powershell|pwsh" | ForEach-Object {
             $_.ProcessorAffinity = 255
             $_.PriorityClass = "High"
         }
