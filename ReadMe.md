@@ -19,10 +19,16 @@ Set the CPU affinities that you want in a json file in the [rules/](rules/) dire
     Import-Module ./Module.psm1 -Force
 ```
 
-## Set the rules
+## Set the rules (affecting all processes)
 
 ``` powershell
     Get-ProcessRules | Set-ProcessRules
+```
+
+## Set the rules (a specific process)
+
+``` powershell
+    Get-ProcessRules | Set-ProcessRules -ProcessId 
 ```
 
 ## Start the processes auto management
