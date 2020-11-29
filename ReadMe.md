@@ -24,3 +24,9 @@ Set the CPU affinities that you want in a json file in the [rules/](rules/) dire
 ``` powershell
     Get-ProcessRules | Set-ProcessRules
 ```
+
+## Start the processes auto management
+
+``` powershell
+    Start-ProcessTuner
+```
