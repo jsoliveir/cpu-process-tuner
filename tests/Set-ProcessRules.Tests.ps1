@@ -1,35 +1,37 @@
 
-Describe "Get-ProcessRules" {
-    BeforeAll{
-        . $PSScriptRoot\..\.src\**\CpuCores.ps1
-        . $PSScriptRoot\..\.src\**\CpuPriorities.ps1
-        . $PSScriptRoot\..\.src\**\Set-ProcessRules.ps1
+Describe "Set-ProcessRules" {
+    BeforeEach{
+        . "$(Split-Path $PSScriptRoot)\src\**\CpuCores.ps1"
+        . "$(Split-Path $PSScriptRoot)\src\**\CpuPriorities.ps1"
+        . "$(Split-Path $PSScriptRoot)\src\**\Set-ProcessRules.ps1"
         Function Get-ProcessRules{
             return @([PSCustomObject]@{
-                Selector = "notepad"
+                Selector = "cmd"
                 CpuPriority = [priority]::Idle
                 CpuAffinity = [cores]::Core1
             })
         }
         
-      $global:openedAlready = @(Get-Process $(Get-ProcessRules).Selector)
-      $global:process = Start-Process (Get-ProcessRules).Selector `
-        -PassThru -WindowStyle Hidden
+      $global:process = Start-Process (Get-ProcessRules).Selector -PassThru
     }
 
-    AfterAll{
+    AfterEach{
         $global:process | Stop-Process -Force
     }
     
     Context "functionality" {
-        It "should_affect_processes" {
-            Get-ProcessRules | Set-ProcessRules
+        It "should_affect_given_process" {
+            Get-ProcessRules | Set-ProcessRules -Verbose -ProcessId  $global:process.Id
             $global:process.PriorityClass | Should Be "Idle"
             $global:process.ProcessorAffinity | Should Be $([int][cores]::Core1)
         }
-        It "should_affect_only_one" {
-            (@(Get-ProcessRules | Set-ProcessRules).Count -$global:openedAlready.Count) `
-                | Should BeExactly 1
+    }
+
+    Context "functionality" {
+        It "should_affect_processes" {
+            Get-ProcessRules | Set-ProcessRules -Verbose
+            $global:process.PriorityClass | Should Be "Idle"
+            $global:process.ProcessorAffinity | Should Be $([int][cores]::Core1)
         }
     }
    

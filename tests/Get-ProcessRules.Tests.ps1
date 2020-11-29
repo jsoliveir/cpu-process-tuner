@@ -1,9 +1,9 @@
 
 Describe "Get-ProcessRules" {
     BeforeAll{
-        . $PSScriptRoot\..\.src\**\CpuCores.ps1
-        . $PSScriptRoot\..\.src\**\CpuPriorities.ps1
-        . $PSScriptRoot\..\.src\**\Get-ProcessRules.ps1
+        . "$(Split-Path $PSScriptRoot)\src\**\CpuCores.ps1"
+        . "$(Split-Path $PSScriptRoot)\src\**\CpuPriorities.ps1"
+        . "$(Split-Path $PSScriptRoot)\src\**\Get-ProcessRules.ps1"
         "[
             {
               `"Selector`": `"(.*)`",
@@ -13,7 +13,7 @@ Describe "Get-ProcessRules" {
         ]" | Set-Content $PSScriptRoot\rule.json
     }
     AfterAll {
-        Remove-Item $PSScriptRoot\rule.json -Force
+        Remove-Item $PSScriptRoot\rule.json -Force -ErrorAction SilentlyContinue
     }
     Context "functionality" {
         

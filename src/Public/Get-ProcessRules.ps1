@@ -1,10 +1,11 @@
 
 Function Get-ProcessRules{
-    param([Parameter(Mandatory=$false)] $Path = (Get-Location))
+    param([Parameter(Mandatory=$false)] $Path = (Get-Location).Path)
     $rules =  (
         Get-ChildItem `
-            -Recurse $Path `
-            -Filter *.json
+            -Filter *.json `
+            -Path $Path `
+            -Recurse 
     ) | Get-Content | ConvertFrom-Json
 
     foreach($r in $rules){

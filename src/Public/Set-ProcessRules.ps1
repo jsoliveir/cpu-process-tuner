@@ -2,19 +2,23 @@
 Function Set-ProcessRules{
     [CmdletBinding()]
     param([Parameter(Mandatory = $true, ValueFromPipeline = $true)] $Rule,
-          [Parameter(Mandatory = $false)] $ProcessName
+          [Parameter(Mandatory = $false)] $ProcessName,
+          [Parameter(Mandatory = $false)] $ProcessId
     )
 
     BEGIN{
         Write-Host -ForegroundColor Magenta "Loading rules ..."
-        if($ProcessName){
-            $global:PROCESSES =  @((Get-Process $ProcessName).Path);
-        }else{
-            $global:PROCESSES =  @((Get-Process).Path);
-        }
-        $global:PROCESSES =  $global:PROCESSES | Where-Object Path  -notMatch "powershell|pwsh"
+        $global:PTUN_EFFECTIVE_RULES = @{}        
 
-        $global:EFFECTIVE_RULES = @{}
+        if($ProcessId){
+            $global:PTUN_PROCESSES =  @(Get-Process -Id $ProcessId);
+        }elseif($ProcessName){
+            $global:PTUN_PROCESSES =  @(Get-Process -Name $ProcessName);
+        }else{
+            $global:PTUN_PROCESSES =  @(Get-Process);
+        }
+
+        $global:PTUN_PROCESSES = $global:PTUN_PROCESSES | Select-Object Id,Name,Path
     }
        
     PROCESS {
@@ -23,10 +27,10 @@ Function Set-ProcessRules{
             "$($Rule.CpuPriority)".PadRight(6) "->" `
             $Rule.CpuAffinity
 
-
-        $global:PROCESSES | Where-Object Path -match $Rule.Selector | Foreach-Object {
+        $global:PTUN_PROCESSES | Where-Object Path -match $Rule.Selector | Foreach-Object {
             if([System.IO.Path]::GetFileName($_)) {
-                $global:EFFECTIVE_RULES[[System.IO.Path]::GetFileNameWithoutExtension($_)] = ([PSCustomObject]@{
+                $key = [System.IO.Path]::GetFileNameWithoutExtension($_)
+                $global:PTUN_EFFECTIVE_RULES[$key] = ([PSCustomObject]@{
                         Affinity   = $Rule.CpuAffinity
                         Priority   = $Rule.CpuPriority
                 })
@@ -35,17 +39,20 @@ Function Set-ProcessRules{
     }
     
     END {
-        foreach($r in @($global:EFFECTIVE_RULES.Keys)){
+        foreach($r in @($global:PTUN_EFFECTIVE_RULES.Keys)){
             foreach($process in Get-Process -ProcessName $r){
                 try{
-                    $process.ProcessorAffinity = [int]$global:EFFECTIVE_RULES[$process.ProcessName].Affinity
-                    $process.PriorityClass = [string]$global:EFFECTIVE_RULES[$process.ProcessName].Priority
+                    $process.ProcessorAffinity = `
+                        [int]$global:PTUN_EFFECTIVE_RULES[$process.ProcessName].Affinity
+                    $process.PriorityClass = `
+                        [string]$global:PTUN_EFFECTIVE_RULES[$process.ProcessName].Priority
+
                     if($VerbosePreference){
-                        Write-Host -ForegroundColor Green "$($process.ProcessName)".PadRight(20) " OK."
+                        Write-Host -ForegroundColor Green "$($process)" "OK."
                     }
                 }catch{
                     if($VerbosePreference){
-                        Write-Host -ForegroundColor Red  "$($process.ProcessName)".PadRight(20) "FAIL : " $_.Exception.Message
+                        Write-Host -ForegroundColor Red "$($process)" "FAIL : " $_.Exception.Message
                     }
                 }
             }
