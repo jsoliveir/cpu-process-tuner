@@ -1,17 +1,20 @@
 
 Function Set-ProcessRules{
     [CmdletBinding()]
-    param([Parameter(Mandatory = $true, ValueFromPipeline = $true)] $Rule)
+    param([Parameter(Mandatory = $true, ValueFromPipeline = $true)] $Rule,
+          [Parameter(Mandatory = $false)] $ProcessName
+    )
 
     BEGIN{
         Write-Host -ForegroundColor Magenta "Loading rules ..."
-        $global:PROCESSES =  (Get-Process | Where-Object Path  -notMatch "powershell|pwsh");
-
-        Get-Process | Where-Object Name -match "powershell|pwsh" | ForEach-Object {
-            $_.ProcessorAffinity = 255
-            $_.PriorityClass = "High"
+        if($ProcessName){
+            $global:PROCESSES =  @((Get-Process $ProcessName).Path);
+        }else{
+            $global:PROCESSES =  @((Get-Process).Path);
         }
-        $global:EFFECTIVE_RULES = @()
+        $global:PROCESSES =  $global:PROCESSES | Where-Object Path  -notMatch "powershell|pwsh"
+
+        $global:EFFECTIVE_RULES = @{}
     }
        
     PROCESS {
@@ -20,37 +23,32 @@ Function Set-ProcessRules{
             "$($Rule.CpuPriority)".PadRight(6) "->" `
             $Rule.CpuAffinity
 
+
         $global:PROCESSES | Where-Object Path -match $Rule.Selector | Foreach-Object {
-
-            $global:EFFECTIVE_RULES = @($global:EFFECTIVE_RULES `
-                | Where-Object Name -notlike $_.ProcessName)
-
-            $global:EFFECTIVE_RULES += ([PSCustomObject]@{
-                Name       = $_.ProcessName
-                Affinity   = $Rule.CpuAffinity
-                Priority   = $Rule.CpuPriority
-            })
+            if([System.IO.Path]::GetFileName($_)) {
+                $global:EFFECTIVE_RULES[[System.IO.Path]::GetFileNameWithoutExtension($_)] = ([PSCustomObject]@{
+                        Affinity   = $Rule.CpuAffinity
+                        Priority   = $Rule.CpuPriority
+                })
+            }
         }
     }
     
     END {
-        foreach($r in $global:EFFECTIVE_RULES | Select-Object * -Unique){
-            Get-Process | Where-Object Name -like $r.Name | ForEach-Object {
+        foreach($r in @($global:EFFECTIVE_RULES.Keys)){
+            foreach($process in Get-Process -ProcessName $r){
                 try{
-                    $_.ProcessorAffinity = [int]$r.Affinity
-                    $_.PriorityClass = [string]$r.Priority
-                    Write-Host -ForegroundColor Green "$($_.ProcessName)".PadRight(20) " OK."
+                    $process.ProcessorAffinity = [int]$global:EFFECTIVE_RULES[$process.ProcessName].Affinity
+                    $process.PriorityClass = [string]$global:EFFECTIVE_RULES[$process.ProcessName].Priority
+                    if($VerbosePreference){
+                        Write-Host -ForegroundColor Green "$($process.ProcessName)".PadRight(20) " OK."
+                    }
                 }catch{
-                    Write-Host -ForegroundColor Red  "$($_.ProcessName)".PadRight(20) "FAIL : " $_.Exception.Message
+                    if($VerbosePreference){
+                        Write-Host -ForegroundColor Red  "$($process.ProcessName)".PadRight(20) "FAIL : " $_.Exception.Message
+                    }
                 }
-               
             }
         }
-        
-        Get-Process | Select-Object `
-        @{n="Process"; e={$_.ProcessName}}, `
-        @{n="Priority"; e={$_.PriorityClass}},  `
-        @{n="Affinity"; e={[cores][int]$_.ProcessorAffinity}} `
-        | Format-Table
     }
 }
