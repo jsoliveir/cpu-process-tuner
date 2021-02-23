@@ -3,7 +3,7 @@ Function Get-ProcessRules{
     param([Parameter(Mandatory=$true)] $Path)
     $rules =  ((
         Get-ChildItem `
-            -Filter *.yml `
+            -Filter *.y*ml `
             -Path $Path
     ) | Get-Content | ConvertFrom-Yaml).rules
 

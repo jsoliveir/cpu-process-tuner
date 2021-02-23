@@ -16,8 +16,13 @@ Import-Module ./ProcessTunnerCLI.psm1 -Force
 ```
 
 ## Create the Rules file
-Create a yaml file with the rules that must be applied [rules/](rules/)
+Create a yaml file with the rules that must be applied [rules/](rules/example.yml)
 
+```powershell
+    # the directory will be created 
+    New-ProcessRulesFile -Path rules/example.yml
+```
+Example:
 ``` yaml
 rules:
   - selector: (.*)              # process path matching regex
