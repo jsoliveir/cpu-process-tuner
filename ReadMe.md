@@ -7,25 +7,35 @@ Set the CPU affinities that you want in a json file in the [rules/](rules/) dire
 >(the file name does not matter, the CLI will join all the files existing in this directory)
 ``` yaml
 rules:
-  - selector: (.*)
-    affinity: [ 0, 1 ]
-    priority: "Normal"
+  - selector: (.*)              # process path matching regex
+    affinity: [ 0, 1 ]          # core0 and core1
+    priority: "Normal"          # priority Normal
 
   - selector: /system32
     affinity: [ 2,3,4 ]
     priority: "Normal"
+
+  - selector: isolated_process.exe
+    affinity: [ 5 ]
+    priority: "High"
 ```
 
 ## Import the existing module
 
-``` powershell
-    Import-Module ./Module.psm1 -Force
+```powershell
+Instal-Module ProcessTunnerCLI 
+```
+
+or
+
+```powershell
+Import-Module ./ProcessTunnerCLI.psm1 -Force
 ```
 
 ## Set the rules (affecting all processes)
 
 ``` powershell
-    Get-ProcessRules | Set-ProcessRules
+Get-ProcessRules | Set-ProcessRules
 ```
 
 ## Set the rules (a specific process)
