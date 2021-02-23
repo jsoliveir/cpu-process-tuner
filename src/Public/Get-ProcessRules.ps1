@@ -16,8 +16,6 @@ Function Get-ProcessRules{
 
         $priority = [CpuPriority]$r.priority
 
-       
-
         $r | Add-Member -Force -Type NoteProperty `
             -Name affinity -Value $affinity
         $r | Add-Member -Force -Type NoteProperty `

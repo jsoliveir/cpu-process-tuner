@@ -45,8 +45,18 @@ Get-ProcessRules | Set-ProcessRules
 Get-ProcessRules | Set-ProcessRules -ProcessId 
 ```
 
-## Start the processes auto management
+## Start the processes auto management 
 
+(background)
 ``` powershell
 Start-ProcessTuner
+```
+(foreground)
+``` powershell
+Start-ProcessTuner -Wait
+```
+## Check the logs 
+
+``` powershell
+Get-Job ProcessTuner | Receive-Job
 ```

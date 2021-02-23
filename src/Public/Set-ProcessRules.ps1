@@ -7,7 +7,6 @@ Function Set-ProcessRules{
     )
 
     BEGIN{
-        Write-Host -ForegroundColor Magenta "Loading rules ..."
         $global:PTUN_EFFECTIVE_RULES = @{}        
 
         if($ProcessId){
