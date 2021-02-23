@@ -24,7 +24,7 @@ rules:
 ## Import the existing module
 
 ```powershell
-Instal-Module ProcessTunnerCLI 
+Install-Module ProcessTunnerCLI 
 ```
 
 or
