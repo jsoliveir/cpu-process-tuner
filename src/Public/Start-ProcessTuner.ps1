@@ -4,7 +4,7 @@ Function Start-ProcessTuner{
         [Parameter(Mandatory=$true)] [Switch] $RulesPath,
         [Parameter(Mandatory=$false)] $Interval = 10,
         [Parameter(Mandatory=$false)] $JobName = "ProcessTuner",
-        [Parameter(Mandatory=$false)] [Switch] $Wait,
+        [Parameter(Mandatory=$false)] [Switch] $Wait
     )
 
     Stop-ProcessTuner
