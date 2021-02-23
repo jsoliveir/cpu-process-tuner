@@ -26,7 +26,7 @@ Function Set-ProcessRules{
             "$($Rule.priority)".PadRight(6) "->" `
             $Rule.affinity
 
-        $global:PTUN_PROCESSES | Where-Object Path -match $Rule.selector | Foreach-Object {
+        $global:PTUN_PROCESSES | Where-Object Path -imatch ".*$($Rule.selector).*" | Foreach-Object {
             if([System.IO.Path]::GetFileName($_.Path)) {
                 $key = [System.IO.Path]::GetFileNameWithoutExtension($_.Path)
                 $global:PTUN_EFFECTIVE_RULES[$key] = ([PSCustomObject]@{
