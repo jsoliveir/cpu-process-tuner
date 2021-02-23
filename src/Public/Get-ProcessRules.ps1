@@ -1,6 +1,6 @@
 
 Function Get-ProcessRules{
-    param([Parameter(Mandatory=$true)] $Path)
+    param([Parameter(Mandatory=$false)] $Path = (Get-Location).Path)
     $rules =  ((
         Get-ChildItem `
             -Filter *.y*ml `

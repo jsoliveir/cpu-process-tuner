@@ -41,13 +41,13 @@ rules:
 ## Set the rules (run once)
 
 ``` powershell
-Get-ProcessRules -Path rules/ | Set-ProcessRules
+Get-ProcessRules | Set-ProcessRules
 ```
 
 ## Set the rules (a specific process)
 
 ``` powershell
-Get-ProcessRules -Path rules/ | Set-ProcessRules -ProcessId 
+Get-ProcessRules -Path rules/example.yml | Set-ProcessRules -ProcessId 
 ```
 
 ## Start the processes auto management (background job)

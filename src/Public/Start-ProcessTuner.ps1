@@ -1,7 +1,7 @@
 
 Function Start-ProcessTuner{
     param (
-        [Parameter(Mandatory=$true)] [Switch] $RulesPath,
+        [Parameter(Mandatory=$false)] $RulesPath = (Get-Location).Path,
         [Parameter(Mandatory=$false)] $Interval = 10,
         [Parameter(Mandatory=$false)] $JobName = "ProcessTuner",
         [Parameter(Mandatory=$false)] [Switch] $Wait
