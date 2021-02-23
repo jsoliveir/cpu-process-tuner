@@ -38,13 +38,12 @@ rules:
     priority: "High"
 ```
 
-## Set the rules (run once)
+## Set the rules 
 
 ``` powershell
 Get-ProcessRules | Set-ProcessRules
 ```
-
-## Set the rules (a specific process)
+or
 
 ``` powershell
 Get-ProcessRules -Path rules/example.yml | Set-ProcessRules -ProcessId 
@@ -54,11 +53,16 @@ Get-ProcessRules -Path rules/example.yml | Set-ProcessRules -ProcessId
 
 (background)
 ``` powershell
-Start-ProcessTuner -RulesPath rules/ -Interval 10
+Start-ProcessTuner `
+    -RulesPath rules/example.yml `
+    -Interval 10
 ```
 (foreground)
 ``` powershell
-Start-ProcessTuner -RulesPath rules/ -Interval 10 -Wait 
+Start-ProcessTuner `
+    -RulesPath rules/example.yml `
+    -Interval 10 `
+    -Wait 
 ```
 ## Check the logs 
 
