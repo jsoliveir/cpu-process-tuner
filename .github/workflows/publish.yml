@@ -9,7 +9,7 @@ jobs:
   Publish:
     env:
       VERSION: ${{ github.event.inputs.version }}
-      DESCRIPTION: ProcessTunner Command Line Interface
+      DESCRIPTION: ProcessTuner Command Line Interface
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/dotnet/sdk:5.0-alpine
     steps:
