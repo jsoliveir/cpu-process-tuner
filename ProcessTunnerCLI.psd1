@@ -17,6 +17,8 @@ ModuleVersion = '0.0.1'
 # Supported PSEditions
 # CompatiblePSEditions = @()
 
+Description="ProcessTunner Command Line Interface"
+
 # ID used to uniquely identify this module
 GUID = 'f97429fa-f755-4724-9a0a-4806d9933860'
 

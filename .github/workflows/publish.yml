@@ -9,7 +9,7 @@ jobs:
   Publish:
     env:
       VERSION: ${{ github.event.inputs.version }}
-      DESCRIPTION: Bitbucket Rest API Command Line Interface
+      DESCRIPTION: ProcessTunner Command Line Interface
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/dotnet/sdk:5.0-alpine
     steps:
