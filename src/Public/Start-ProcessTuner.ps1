@@ -11,7 +11,7 @@ Function Start-ProcessTuner{
     Start-Job -Name $JobName {
         param($Interval)
 
-        Import-Module -Force ./ProcessTunerCLI.psm1
+        Import-Module ProcessTunerCLI
 
         while ($true) {
             Get-ProcessRules | Set-ProcessRules
