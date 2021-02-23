@@ -4,8 +4,20 @@ ProcessTunerCLI is a tool that manages CPU priorities for processes running in a
 
 # How to use it
 
-Set the CPU affinities that you want in a json file in the [rules/](rules/) directory
->(the file name does not matter, the CLI will join all the files existing in this directory)
+## Import the existing module
+
+```powershell
+Install-Module ProcessTunnerCLI 
+
+or
+
+```powershell
+Import-Module ./ProcessTunnerCLI.psm1 -Force
+```
+
+## Create the Rules file
+Create a yaml file with the rules that must be applied [rules/](rules/)
+
 ``` yaml
 rules:
   - selector: (.*)              # process path matching regex
@@ -21,39 +33,27 @@ rules:
     priority: "High"
 ```
 
-## Import the existing module
-
-```powershell
-Install-Module ProcessTunnerCLI 
-```
-
-or
-
-```powershell
-Import-Module ./ProcessTunnerCLI.psm1 -Force
-```
-
-## Set the rules (affecting all processes)
+## Set the rules (run once)
 
 ``` powershell
-Get-ProcessRules | Set-ProcessRules
+Get-ProcessRules -Path rules/ | Set-ProcessRules
 ```
 
 ## Set the rules (a specific process)
 
 ``` powershell
-Get-ProcessRules | Set-ProcessRules -ProcessId 
+Get-ProcessRules -Path rules/ | Set-ProcessRules -ProcessId 
 ```
 
-## Start the processes auto management 
+## Start the processes auto management (background job)
 
 (background)
 ``` powershell
-Start-ProcessTuner
+Start-ProcessTuner -RulesPath rules/ -Interval 10
 ```
 (foreground)
 ``` powershell
-Start-ProcessTuner -Wait
+Start-ProcessTuner -RulesPath rules/ -Interval 10 -Wait 
 ```
 ## Check the logs 
 

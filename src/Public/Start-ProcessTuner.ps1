@@ -1,24 +1,25 @@
 
 Function Start-ProcessTuner{
     param (
+        [Parameter(Mandatory=$true)] [Switch] $RulesPath,
         [Parameter(Mandatory=$false)] $Interval = 10,
         [Parameter(Mandatory=$false)] $JobName = "ProcessTuner",
-        [Parameter(Mandatory=$false)] [Switch] $Wait
+        [Parameter(Mandatory=$false)] [Switch] $Wait,
     )
 
     Stop-ProcessTuner
 
     Start-Job -Name $JobName {
-        param($Interval)
+        param($Interval,$RulesPath)
 
         Import-Module ProcessTunerCLI
 
         while ($true) {
-            Get-ProcessRules | Set-ProcessRules
+            Get-ProcessRules -Path $RulesPath | Set-ProcessRules
             Start-Sleep -Seconds $Interval
         }
 
-    } -ArgumentList $Interval
+    } -ArgumentList $Interval, $RulesPath
 
     if($Wait){
         Get-Job $JobName | Receive-Job -Wait

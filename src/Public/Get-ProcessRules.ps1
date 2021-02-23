@@ -1,6 +1,6 @@
 
 Function Get-ProcessRules{
-    param([Parameter(Mandatory=$false)] $Path = (Join-Path (Get-Location).Path  "rules"))
+    param([Parameter(Mandatory=$true)] $Path)
     $rules =  ((
         Get-ChildItem `
             -Filter *.yml `
