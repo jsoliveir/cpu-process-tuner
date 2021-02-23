@@ -42,11 +42,11 @@ Get-ProcessRules | Set-ProcessRules
 ## Set the rules (a specific process)
 
 ``` powershell
-    Get-ProcessRules | Set-ProcessRules -ProcessId 
+Get-ProcessRules | Set-ProcessRules -ProcessId 
 ```
 
 ## Start the processes auto management
 
 ``` powershell
-    Start-ProcessTuner
+Start-ProcessTuner
 ```

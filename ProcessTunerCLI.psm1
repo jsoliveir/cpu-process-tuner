@@ -1,3 +1,5 @@
+Install-Module powershell-yaml -ErrorAction Continue
+
 $Scripts =  @( Get-ChildItem -Path $PSScriptRoot\src\**\*.ps1 -ErrorAction SilentlyContinue )
 $Public =  @( Get-ChildItem -Path $PSScriptRoot\src\Public\*.ps1 -ErrorAction SilentlyContinue )
 
@@ -10,5 +12,3 @@ $Scripts | Sort-Object -Property Basename | Foreach-Object{
 }
 
 Export-ModuleMember -Function $Public.Basename
-
-Install-Module powershell-yaml -ErrorAction Continue
