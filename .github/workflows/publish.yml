@@ -21,6 +21,7 @@ jobs:
           -Path .\ProcessTunerCLI.psd1 
           -ModuleVersion '${GITHUB_REF#refs/tags/v}' 
           -Author '${GITHUB_WORKSPACE}' 
-          -Description '${DESCRIPTION}'"
+          -Description '${DESCRIPTION}'
+          -FunctionsToExport '*'"
       - name: Publish
         run: pwsh -Command 'Publish-Module -Path . -NuGetApiKey ${{ secrets.NuGetApiKey }}'
