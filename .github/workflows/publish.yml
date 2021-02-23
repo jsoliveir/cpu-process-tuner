@@ -5,6 +5,9 @@ on:
       version:
         description: 'Version (1.0.0)'
         required: true
+  push:
+    tags:
+      - 'v*'
 jobs:
   Publish:
     env:
@@ -26,10 +29,3 @@ jobs:
           -Description '${DESCRIPTION}'"
       - name: Publish
         run: pwsh -Command 'Publish-Module -Path . -NuGetApiKey ${{ secrets.NuGetApiKey }}'
-      - name: Tagging
-        run: |
-          git config user.name "Automated Publisher"
-          git config user.email "${GITHUB_ACTOR}@${GITHUB_WORKSPACE}.${GITHUB_REPOSITORY}"
-          git commit -am "Version v${VERSION} published";
-          git remote add github "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git";
-          git tag "v${VERSION}" && git push github -f --follow-tags
