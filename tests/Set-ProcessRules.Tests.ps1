@@ -1,18 +1,18 @@
 
 Describe "Set-ProcessRules" {
     BeforeEach{
-        . "$(Split-Path $PSScriptRoot)\src\**\CpuCores.ps1"
-        . "$(Split-Path $PSScriptRoot)\src\**\CpuPriorities.ps1"
+        . "$(Split-Path $PSScriptRoot)\src\**\CpuCore.ps1"
+        . "$(Split-Path $PSScriptRoot)\src\**\CpuPriority.ps1"
         . "$(Split-Path $PSScriptRoot)\src\**\Set-ProcessRules.ps1"
         Function Get-ProcessRules{
             return @([PSCustomObject]@{
-                Selector = "cmd"
-                priority = [priority]::Idle
-                affinity = [cores]::Core1
+                selector = "cmd"
+                priority = [CpuPriority]::Idle
+                affinity = [CpuCore]::Core1
             })
         }
         
-      $global:process = Start-Process (Get-ProcessRules).Selector -PassThru
+      $global:process = Start-Process (Get-ProcessRules).selector -PassThru
     }
 
     AfterEach{
@@ -22,16 +22,16 @@ Describe "Set-ProcessRules" {
     Context "functionality" {
         It "should_affect_given_process" {
             Get-ProcessRules | Set-ProcessRules -Verbose -ProcessId  $global:process.Id
-            $global:process.PriorityClass | Should Be "Idle"
-            $global:process.ProcessorAffinity | Should Be $([int][cores]::Core1)
+            $global:process.PriorityClass | Should -Be "Idle"
+            $global:process.ProcessorAffinity | Should -Be $([int][CpuCore]::Core1)
         }
     }
 
     Context "functionality" {
         It "should_affect_processes" {
             Get-ProcessRules | Set-ProcessRules -Verbose
-            $global:process.PriorityClass | Should Be "Idle"
-            $global:process.ProcessorAffinity | Should Be $([int][cores]::Core1)
+            $global:process.PriorityClass | Should -Be "Idle"
+            $global:process.ProcessorAffinity | Should -Be $([int][CpuCore]::Core1)
         }
     }
    

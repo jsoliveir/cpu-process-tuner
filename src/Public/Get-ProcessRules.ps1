@@ -1,11 +1,10 @@
 
 Function Get-ProcessRules{
-    param([Parameter(Mandatory=$false)] $Path = (Get-Location).Path)
+    param([Parameter(Mandatory=$false)] $Path = (Join-Path (Get-Location).Path  "rules"))
     $rules =  ((
         Get-ChildItem `
             -Filter *.yml `
-            -Path $Path `
-            -Recurse 
+            -Path $Path
     ) | Get-Content | ConvertFrom-Yaml).rules
 
     foreach($r in $rules){
