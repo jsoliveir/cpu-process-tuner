@@ -7,8 +7,8 @@ Describe "Set-ProcessRules" {
         Function Get-ProcessRules{
             return @([PSCustomObject]@{
                 Selector = "cmd"
-                CpuPriority = [priority]::Idle
-                CpuAffinity = [cores]::Core1
+                priority = [priority]::Idle
+                affinity = [cores]::Core1
             })
         }
         

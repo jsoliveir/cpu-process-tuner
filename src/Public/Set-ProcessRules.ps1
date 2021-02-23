@@ -24,15 +24,15 @@ Function Set-ProcessRules{
     PROCESS {
         Write-Host -ForegroundColor DarkGray `
             $Rule.Selector.PadRight(22).Substring(0,20) `
-            "$($Rule.CpuPriority)".PadRight(6) "->" `
-            $Rule.CpuAffinity
+            "$($Rule.priority)".PadRight(6) "->" `
+            $Rule.affinity
 
-        $global:PTUN_PROCESSES | Where-Object Path -match $Rule.Selector | Foreach-Object {
+        $global:PTUN_PROCESSES | Where-Object Path -match $Rule.selector | Foreach-Object {
             if([System.IO.Path]::GetFileName($_)) {
                 $key = [System.IO.Path]::GetFileNameWithoutExtension($_)
                 $global:PTUN_EFFECTIVE_RULES[$key] = ([PSCustomObject]@{
-                        Affinity   = $Rule.CpuAffinity
-                        Priority   = $Rule.CpuPriority
+                        Affinity   = $Rule.affinity
+                        Priority   = $Rule.priority
                 })
             }
         }
@@ -40,12 +40,12 @@ Function Set-ProcessRules{
     
     END {
         foreach($r in @($global:PTUN_EFFECTIVE_RULES.Keys)){
-            foreach($process in Get-Process -ProcessName $r){
+            foreach($process in Get-Process -ProcessName $r -ErrorAction SilentlyContinue ){
                 try{
                     $process.ProcessorAffinity = `
-                        [int]$global:PTUN_EFFECTIVE_RULES[$process.ProcessName].Affinity
+                        [int]$global:PTUN_EFFECTIVE_RULES[$process.ProcessName].affinity
                     $process.PriorityClass = `
-                        [string]$global:PTUN_EFFECTIVE_RULES[$process.ProcessName].Priority
+                        [string]$global:PTUN_EFFECTIVE_RULES[$process.ProcessName].proprity
 
                     if($VerbosePreference){
                         Write-Host -ForegroundColor Green "$($process)" "OK."

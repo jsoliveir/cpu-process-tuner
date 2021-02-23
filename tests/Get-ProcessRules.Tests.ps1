@@ -7,8 +7,8 @@ Describe "Get-ProcessRules" {
         "[
             {
               `"Selector`": `"(.*)`",
-              `"CpuAffinity`": [ 1,2 ],
-              `"CpuPriority`": `"Normal`"
+              `"affinity`": [ 1,2 ],
+              `"priority`": `"Normal`"
             }
         ]" | Set-Content $PSScriptRoot\rule.json
     }
@@ -26,8 +26,8 @@ Describe "Get-ProcessRules" {
         "[
             {
               `"Selector`": `"(.*)`",
-              `"CpuAffinity`": [ 0 ],
-              `"CpuPriority`": `"Normal`"
+              `"affinity`": [ 0 ],
+              `"priority`": `"Normal`"
             }
         ]" | Set-Content $PSScriptRoot\rule.json
 

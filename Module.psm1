@@ -9,6 +9,6 @@ $Scripts | Sort-Object -Property Basename | Foreach-Object{
     . $_.FullName
 }
 
-Set-Variable -Name "RulesPath" -Scope Global -Value "$PSScriptRoot\Rules"
-
 Export-ModuleMember -Function $Public.Basename
+
+Install-Module powershell-yaml -ErrorAction Continue

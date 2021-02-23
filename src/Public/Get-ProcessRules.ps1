@@ -1,28 +1,28 @@
 
 Function Get-ProcessRules{
     param([Parameter(Mandatory=$false)] $Path = (Get-Location).Path)
-    $rules =  (
+    $rules =  ((
         Get-ChildItem `
-            -Filter *.json `
+            -Filter *.yml `
             -Path $Path `
             -Recurse 
-    ) | Get-Content | ConvertFrom-Json
+    ) | Get-Content | ConvertFrom-Yaml).rules
 
     foreach($r in $rules){
 
-        [cores]$affinity = $r.CpuAffinity | ForEach-Object {
-            if($_){ [cores]"Core$_"  }
-            else {[cores]255}
+        [CpuCore]$affinity = $r.affinity | ForEach-Object {
+            if($_){ [CpuCore]"Core$_"  }
+            else {[CpuCore]255}
         }
 
-        $priority = [priority]$r.CpuPriority
+        $priority = [CpuPriority]$r.priority
 
        
 
         $r | Add-Member -Force -Type NoteProperty `
-            -Name CpuAffinity -Value $affinity
+            -Name affinity -Value $affinity
         $r | Add-Member -Force -Type NoteProperty `
-            -Name CpuPriority -Value $priority
+            -Name priority -Value $priority
     }
     
     return $rules

@@ -1,8 +1,8 @@
-[flags()] Enum Priority {
+[flags()] Enum CpuPriority {
     Idle       
     BelowNormal
     Normal     
     AboveNormal
     High       
     RealTime   
-  }
+}

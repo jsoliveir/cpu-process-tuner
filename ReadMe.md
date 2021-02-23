@@ -5,14 +5,15 @@ ProcessTunerCLI is a tool that manages CPU priorities for processes running in a
 
 Set the CPU affinities that you want in a json file in the [rules/](rules/) directory
 >(the file name does not matter, the CLI will join all the files existing in this directory)
-``` json
-    [
-        {
-            "Selector": "/process/bin/path",
-            "CpuAffinity": [ 0, 1 ],
-            "CpuPriority": "Normal"
-        }
-    ]
+``` yaml
+rules:
+  - selector: (.*)
+    affinity: [ 0, 1 ]
+    priority: "Normal"
+
+  - selector: /system32
+    affinity: [ 2,3,4 ]
+    priority: "Normal"
 ```
 
 ## Import the existing module
