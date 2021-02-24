@@ -8,6 +8,7 @@ ProcessTunerCLI is a tool that manages CPU priorities for processes running in a
 
 ```powershell
 Install-Module ProcessTunnerCLI 
+```
 
 or
 
