@@ -1,5 +1,5 @@
 [![Tests](https://github.com/jsoliveir/ProcessTunerCLI/actions/workflows/tests.yml/badge.svg)](https://github.com/jsoliveir/ProcessTunerCLI/actions/workflows/tests.yml)
-# What is ProcessTunerCLI
+# What the ProcessTunerCLI is
 
 ProcessTuner is a tool that manages CPU priorites for processes running in a given operating system. 
 
