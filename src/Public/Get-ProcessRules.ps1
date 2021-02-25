@@ -1,26 +1,16 @@
 
 Function Get-ProcessRules{
-    param([Parameter(Mandatory=$false)] $Path = (Get-Location).Path)
-    $rules =  ((
-        Get-ChildItem `
-            -Filter *.y*ml `
-            -Path $Path
-    ) | Get-Content | ConvertFrom-Yaml).rules
+    param([Parameter(Mandatory=$false)] $Config = (Get-ProcessConfigFile))
+    $RulesYml = (Get-Content $Config | ConvertFrom-Yaml).rules
 
-    foreach($r in $rules){
+    $Rules = @()
 
-        [CpuCore]$affinity = $r.affinity | ForEach-Object {
-            if($_){ [CpuCore]"Core$_"  }
-            else {[CpuCore]255}
+    foreach($r in $RulesYml){
+        $Rules += [PSCustomObject] [Ordered]@{
+            selector = $r.selector
+            priority = [CpuPriority]$r.priority
+            affinity = [CpuAffinity]$r.affinity
         }
-
-        $priority = [CpuPriority]$r.priority
-
-        $r | Add-Member -Force -Type NoteProperty `
-            -Name affinity -Value $affinity
-        $r | Add-Member -Force -Type NoteProperty `
-            -Name priority -Value $priority
     }
-    
-    return $rules
+    return $Rules
 }

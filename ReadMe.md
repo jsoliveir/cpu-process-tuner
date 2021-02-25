@@ -4,53 +4,59 @@ ProcessTunerCLI is a tool that manages CPU priorities for processes running in a
 
 # How to use it
 
-## Import the existing module
+## Install
 
 ```powershell
 Install-Module ProcessTunnerCLI 
 ```
 
-or
+## Import
 
 ```powershell
 Import-Module ./ProcessTunnerCLI.psm1 -Force
 ```
 
-## Create the Rules file
-Create a yaml file with the rules that must be applied [rules/](rules/example.yml)
-
+## Create rules
 ```powershell
-    # the directory will be created 
-    New-ProcessRulesFile -Path rules/example.yml
-```
-Example:
-``` yaml
-rules:
-  - selector: (.*)              # process path matching regex
-    affinity: [ 0, 1 ]          # core0 and core1
-    priority: "Normal"          # priority Normal
+    New-ProcessRule `
+      -Selector /system32 `
+      -Priority High
 
-  - selector: /system32
-    affinity: [ 2,3,4 ]
-    priority: "Normal"
-
-  - selector: isolated_process.exe
-    affinity: [ 5 ]
-    priority: "High"
+    New-ProcessRule `
+       -Affinity CPU0,CPU1,CPU2 `
+       -Priority BelowNormal `
+       -Selector notepad  `
+    
+    New-ProcessRule `
+       -Affinity CPU5,CPU6,CPU7 `
+       -Priority AboveNormal 
+       -Selector chrome  `
 ```
 
-## Set the rules 
+## Remove rules
+```powerhell
+    Remove-ProcessRule `
+       -Selector /system32
+      
+    Remove-ProcessRule `
+       -Priority High
+
+    Remove-ProcessRule `
+       -Selector /system32  `
+       -Affinity CPU0,CPU2  `
+```
+
+## Check existing rules
+```powerhell
+    Get-ProcessRules
+```
+## Apply the rules 
 
 ``` powershell
 Get-ProcessRules | Set-ProcessRules
 ```
-or
 
-``` powershell
-Get-ProcessRules -Path rules/example.yml | Set-ProcessRules -ProcessId 
-```
-
-## Start the processes auto management (background job)
+## Start auto management (rule new processes)
 
 (background)
 ``` powershell
@@ -65,8 +71,25 @@ Start-ProcessTuner `
     -Interval 10 `
     -Wait 
 ```
-## Check the logs 
+## Check the logs (background)
 
 ``` powershell
-Get-Job ProcessTuner | Receive-Job
+Get-Job ProcessTuner | Receive-Job -Wait
 ```
+
+
+# Configurations 
+
+By default ProcessTuner looks for a file named by `rules.yml` in the current working directory.
+
+If any configuration file could not be found ProcessTuner will look for it in the parent directories.
+
+If the configuration is still not found the one existing in the $HOME will be used.
+
+To see what file is being using run the following command:
+
+```powershell
+ Get-ProcessConfigFile
+ ```
+
+

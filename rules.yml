@@ -1,0 +1,5 @@
+rules:
+- selector: .*
+  priority: 2
+  affinity: 255
+
