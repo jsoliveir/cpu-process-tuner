@@ -12,7 +12,7 @@ Powershell / Powershell Core v5.0+
 
 Given a scenario like this:
 
-You're running a I7 machine (with 8 CPUs)
+You're running a I5 machine (4 Cores)
 Tons of processes are running in background...
 You figure out that a specifc process, for some reason, is consumming 100% of your total CPU power.
 This process is "burning" the machine resources and is the operating system is completly hanged.
