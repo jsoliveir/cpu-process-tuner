@@ -1,6 +1,30 @@
 [![Tests](https://github.com/jsoliveir/ProcessTunerCLI/actions/workflows/tests.yml/badge.svg)](https://github.com/jsoliveir/ProcessTunerCLI/actions/workflows/tests.yml)
 # What is ProcessTunerCLI
-ProcessTunerCLI is a tool that manages CPU priorities for processes running in a given operating system. The tool can be useful when there is a need of restricting CPUs (Cores) for processes in order to keep the operating system responsive.
+
+ProcessTuner is a tool that manages CPU priorites for processes running in a given operating system. 
+
+The tool can be helpful to restrict the number of CPUs Cores assigned for running processes or make some applications running on higher priorities than others.
+
+# The Problem ...
+
+Given a scenario like this:
+
+You're running a I7 machine (with 8 CPUs)
+Tons of processes are running in background...
+You figure out that a specifc process, for some reason, is consumming 100% of your total CPU power.
+This process is "burning" the machine resources and is the operating system is completly hanged.
+
+## What would you do?
+
+The first approach would be to find and kill the process but, sometimes that cannot be done.
+
+If the process is an Antivirus, an application running in a server you might need it running and in this case, would be really good if we could control CPU resources (priorities) for that given process. 
+
+ProcessTuner allows to set CPU affinities/priorities for processes running the the operating system. 
+That means that you can isolate processes in specific CPU cores, making them slower, but letting the operating system responsive enough to work on more important tasks.
+
+For the problematic scenario above, you could use this tool to create a `Rule` for that  given process. You would set the CPU affinity to [CPU1] and priority to [Idle].
+That mean that 100% of CPU power for that process will be only 25% of your total CPU capacity and other processes that might need the [CPU1] will have higher priority in terms of tasks processing.
 
 # How to use it
 
