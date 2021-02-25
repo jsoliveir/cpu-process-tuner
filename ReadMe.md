@@ -5,6 +5,9 @@ ProcessTuner is a tool that manages CPU priorites for processes running in a giv
 
 The tool can be helpful to restrict the number of CPUs Cores assigned for running processes or make some applications running on higher priorities than others.
 
+## Requirements
+Powershell / Powershell Core v5.0+
+
 # The Problem ...
 
 Given a scenario like this:
