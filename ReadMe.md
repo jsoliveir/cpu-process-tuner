@@ -72,9 +72,15 @@ Import-Module ./ProcessTunnerCLI.psm1 -Force
 
 ## Check existing rules
 ```powerhell
-    Get-ProcessRules
+Get-ProcessRules
 ```
-## Apply the rules 
+    selector priority         affinity
+    -------- --------         --------
+    chrome   RealTime CPU0, CPU1, CPU2
+    code         High              All
+    .*         Normal              All
+
+## Apply the rules once (testing)
 
 ``` powershell
 Get-ProcessRules | Set-ProcessRules

@@ -1,8 +1,0 @@
-rules:
-  - selector: (.*)
-    affinity: [ 0, 1 ]
-    priority: "Normal"
-
-  - selector: /system32
-    affinity: [ 2,3,4 ]
-    priority: "Normal"
