@@ -1,6 +1,11 @@
 Function Get-ProcessConfigFile {
+    param([Parameter(Mandatory=$false)] [Switch] $Global)
     $File = "rules.yml"
     $Path = (Get-Location).Path
+
+    if($Global){
+        return (Join-Path $HOME $File)
+    }
 
     while (Test-Path $Path -IsValid){
         if(!(Test-Path (Join-Path $Path $File))){

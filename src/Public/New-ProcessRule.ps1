@@ -3,14 +3,15 @@ Function New-ProcessRule {
         [Parameter(Mandatory=$false)] [String] $Selector        = ".*",
         [Parameter(Mandatory=$false)] [CpuPriority] $Priority   = [CpuPriority]::Normal,
         [Parameter(Mandatory=$false)] [CpuAffinity] $Affinity   = [CpuAffinity]::All,
-        [Parameter(Mandatory=$false)] [String] $Config          = (Get-ProcessConfigFile)
+        [Parameter(Mandatory=$false)] [String] $Config          = (Get-ProcessConfigFile -Global:$Global),
+        [Parameter(Mandatory=$false)] [Switch] $Global      
     )
-    
+
     if($Config -notlike "*.y*ml" )
         {  $Config = "$Path.yml" } 
 
     if(!(Test-Path $Config)) 
-        { New-Item -Force $Config }
+        { New-Item -Force $Config | Out-Null}
 
     $Rules = Get-Content $Config | ConvertFrom-Yaml -ErrorAction Ignore -Ordered
     
