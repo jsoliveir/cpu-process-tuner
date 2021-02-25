@@ -8,7 +8,7 @@ Function New-ProcessRule {
     )
 
     if($Config -notlike "*.y*ml" )
-        {  $Config = "$Path.yml" } 
+        {  $Config = "${Config}.yml" } 
 
     if(!(Test-Path $Config)) 
         { New-Item -Force $Config | Out-Null}

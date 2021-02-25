@@ -7,7 +7,7 @@ Function Remove-ProcessRule {
     )
 
     if(!(Test-Path $Config)) 
-        { return "File $Path not found" }
+        { return }
 
     $Rules = Get-Content $Config | ConvertFrom-Yaml -ErrorAction Ignore -Ordered
     
