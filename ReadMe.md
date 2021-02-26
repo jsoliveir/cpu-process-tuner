@@ -1,12 +1,11 @@
 [![Tests](https://github.com/jsoliveir/ProcessTunerCLI/actions/workflows/tests.yml/badge.svg)](https://github.com/jsoliveir/ProcessTunerCLI/actions/workflows/tests.yml)
 # What the ProcessTunerCLI is
+> Powershell 5.0+ | Powershell Core 5.0+
 
 ProcessTuner is a tool that manages CPU priorites for processes running in a given operating system. 
 
 The tool can be helpful to restrict the number of CPUs Cores assigned for running processes or make some applications running on higher priorities than others.
 
-## Requirements
-Powershell / Powershell Core v5.0+
 
 # The Problem ...
 
@@ -113,6 +112,12 @@ Get-Job ProcessTuner | Receive-Job -Keep
 ``` powershell
 Get-Job ProcessTuner | Receive-Job -Wait
 ```
+
+# 
+
+![](img/print.png "ProcessTuner CLI")
+
+# 
 
 ## Hide/Minimize current the console window
 
