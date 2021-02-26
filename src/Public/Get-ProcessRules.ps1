@@ -6,7 +6,6 @@ Function Get-ProcessRules{
 
     if( ! $RulesYml ){
         Write-Warning "No Rules found!"
-        Write-Host -ForegroundColor DarkGray "Run [New-ProcessRule] to create the fist rule"
         return
     }
 

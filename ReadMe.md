@@ -89,23 +89,27 @@ Get-ProcessRules
 Get-ProcessRules | Set-ProcessRules
 ```
 
-## Start auto management (rule new processes)
+## Start auto management (background / dettached)
 
-(background)
 ``` powershell
 Start-ProcessTuner `
     -RulesPath rules/example.yml `
     -Interval 10
 ```
-(foreground)
+## Start auto management (watch / attached)
 ``` powershell
 Start-ProcessTuner `
     -RulesPath rules/example.yml `
     -Interval 10 `
-    -Wait 
+    -Watch 
 ```
 ## Check the logs (background)
 
+``` powershell
+Get-Job ProcessTuner | Receive-Job -Keep
+```
+
+## Attach to the job (realtime)
 ``` powershell
 Get-Job ProcessTuner | Receive-Job -Wait
 ```

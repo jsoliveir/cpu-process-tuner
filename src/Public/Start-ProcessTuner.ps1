@@ -3,25 +3,29 @@ Function Start-ProcessTuner{
     param (
         [Parameter(Mandatory=$false)] $Interval         = 10,
         [Parameter(Mandatory=$false)] $JobName          = "ProcessTuner",
-        [Parameter(Mandatory=$false)] $Config           = (Get-ProcessConfigFile),
-        [Parameter(Mandatory=$false)] [Switch] $Wait
+        [Parameter(Mandatory=$false)] [Switch] $Watch
     )
 
     Stop-ProcessTuner
 
     Start-Job -Name $JobName {
-        param($Interval,$RulesPath)
+        param($Interval, $Watch)
 
-        Import-Module ProcessTunerCLI
-
+        if(Get-Module ProcessTunerCLI){
+            Import-Module ProcessTunerCLI -Force -Verbose:$false
+        } else {
+            Import-Module ./ProcessTunerCLI.psm1 -Force -Verbose:$false
+        }
+        
         while ($true) {
-            Get-ProcessRules -Path $RulesPath | Set-ProcessRules
+            if($Watch){ Clear-Host }
+            Get-ProcessRules | Set-ProcessRules
             Start-Sleep -Seconds $Interval
         }
 
-    } -ArgumentList $Interval, $RulesPath
+    } -ArgumentList $Interval, $Watch
 
-    if($Wait){
+    if($Watch){
         Get-Job $JobName | Receive-Job -Wait
     }
 }

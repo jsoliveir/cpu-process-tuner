@@ -29,6 +29,8 @@ Function New-ProcessRule {
 
     $Rules | ConvertTo-Yaml |  Set-Content $Config
 
+    $Rules.rules | Format-Table
+
     return  @([PSCustomObject] [Ordered] @{ 
         selector=$Selector
         priority=$Priority
