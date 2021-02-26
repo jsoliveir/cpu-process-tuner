@@ -116,25 +116,19 @@ Get-Job ProcessTuner | Receive-Job -Wait
 
 ## Hide/Minimize current the console window
 
-Minimize
 ``` powershell
 Set-WindowStyle -Style MINIMIZE
 ```
 
-Hide
-
 ``` powershell
-Set-WindowStyle -Style HIDE
+Set-WindowStyle -Style MAXIMIZE
 ```
 
 ``` powershell
-Set-WindowStyle -Style HIDE
+Set-WindowStyle -Style SHOWDEFAULT
 ```
 
-``` powershell
-Get-Process pwsh | % `
-    { Set-WindowStyle -Style HIDE -ProcessId $_.Id } 
-```
+
 
 Allowed Window Styles:
 
