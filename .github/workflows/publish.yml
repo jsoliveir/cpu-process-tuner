@@ -1,4 +1,4 @@
-name: Publish new version
+name: Publish
 on:
   workflow_dispatch:
   push:
@@ -20,7 +20,7 @@ jobs:
         run: >
           pwsh -Command "New-ModuleManifest 
           -Path .\ProcessTunerCLI.psd1 
-          -ModuleVersion '1.0.${{ github.run_number }}}' 
+          -ModuleVersion '1.0.${{ github.run_number }}' 
           -Author '${GITHUB_WORKSPACE}' 
           -Description '${DESCRIPTION}' 
           -FunctionsToExport '*' 
