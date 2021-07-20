@@ -101,20 +101,28 @@ Get-ProcessRules
 Get-ProcessRules | Set-ProcessRules
 ```
 
+## Start auto management (attached)
+``` powershell
+Start-ProcessTuner 
+```
+
 ## Start auto management (background / dettached)
+
+``` powershell
+Start-ProcessTuner -Background
+```
+
+## Extra args
 
 ``` powershell
 Start-ProcessTuner `
     -RulesPath rules/example.yml `
-    -Interval 10
-```
-## Start auto management (watch / attached)
-``` powershell
-Start-ProcessTuner `
-    -RulesPath rules/example.yml `
     -Interval 10 `
-    -Watch 
+    -Background
 ```
+
+
+
 ## Check the logs (background)
 
 ``` powershell
@@ -165,6 +173,8 @@ If any configuration file could not be found ProcessTuner will look for it in th
 If the configuration is still not found the one existing in the $HOME will be used.
 
 To see what file is being using run the following command:
+
+## Get the current config file path
 
 ```powershell
  Get-ProcessConfigFile
