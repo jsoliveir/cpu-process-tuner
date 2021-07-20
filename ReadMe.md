@@ -9,15 +9,13 @@ The tool can be helpful to restrict the number of CPUs Cores assigned for runnin
 
 # The Problem ...
 
-Given a scenario like this:
+1. Given You're have a I5 machine as an example (4 Cores)
 
-You're running a I5 machine (4 Cores)
+2. The machine is running applications and services backed by processes ...
 
-Tons of processes are running in background...
+3. You figure out that a specifc process, for some reason, is consumming 100% of your total CPU power ...
 
-You figure out that a specifc process, for some reason, is consumming 100% of your total CPU power.
-
-_The process is "burning" the machine resources and is the operating system is completly hanged._
+4. You concluded that it is "burning" the machine resources and is the operating system is completly hanged.
 
 ## What would you do?
 
