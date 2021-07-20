@@ -10,7 +10,7 @@ Function Start-ProcessTuner{
     Stop-ProcessTuner
 
     Start-Job -Name $JobName {
-        param($Interval, $Watch)
+        param($Interval, $Backgound)
 
         if(Get-Module ProcessTuner){
             Import-Module ProcessTuner -Force -Verbose:$false
@@ -25,9 +25,11 @@ Function Start-ProcessTuner{
             Start-Sleep -Seconds $Interval
         }
 
-    } -ArgumentList $Interval, $Watch
+    } -ArgumentList $Interval, $Backgound | Out-Null
 
     if(!$Backgound){
         Get-Job $JobName | Receive-Job -Wait
+    }else{
+        Get-Job $JobName
     }
 }
