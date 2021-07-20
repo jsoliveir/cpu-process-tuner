@@ -33,13 +33,13 @@ That mean that 100% of CPU power for that process will be only 25% of your total
 ## Install
 
 ```powershell
-Install-Module ProcessTunnerCLI 
+Install-Module ProcessTuner 
 ```
 
 ## Import
 
 ```powershell
-Import-Module ./ProcessTunnerCLI.psm1 -Force
+Import-Module ./ProcessTuner.psm1 -Force
 ```
 
 ## Create rules
