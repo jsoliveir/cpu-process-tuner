@@ -34,11 +34,6 @@ That mean that 100% of CPU power for that process will be only 25% of your total
 
 ```powershell
 Install-Module ProcessTuner
-```
-
-## Import
-
-```powershell
 Import-Module ProcessTuner -Force
 ```
 
@@ -46,6 +41,7 @@ Import-Module ProcessTuner -Force
 
 ```powershell
 Update-Module ProcessTuner
+Import-Module ProcessTuner -Force
 ```
 
 ## Create rules
