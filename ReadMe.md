@@ -39,7 +39,7 @@ Install-Module ProcessTuner -Force
 ## Import
 
 ```powershell
-Import-Module ./ProcessTuner.psm1 -Force
+Import-Module ProcessTuner -Force
 ```
 
 ## Create rules
