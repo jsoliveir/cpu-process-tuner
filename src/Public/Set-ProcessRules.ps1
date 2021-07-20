@@ -9,6 +9,8 @@ Function Set-ProcessRules{
         $global:PTUN_EFFECTIVE_RULES = @{}        
         $global:PTUN_PROCESSES = (Get-Process) | Select-Object Id,Name,Path
         Write-Host "`n$(Get-Date)"
+        Write-Host -ForegroundColor darkgray "Run Get-ProcessRules to see the configured processes list"
+        Write-Host -ForegroundColor yellow "`nOpened Processes:"
     }
 
 
