@@ -7,7 +7,6 @@ on:
 jobs:
   Publish:
     env:
-      VERSION: ${{ github.event.inputs.version }}
       DESCRIPTION: ProcessTuner Command Line Interface
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/dotnet/sdk:5.0-alpine
@@ -19,11 +18,11 @@ jobs:
       - name: Versioning
         run: >
           pwsh -Command "New-ModuleManifest 
-          -Path .\ProcessTunerCLI.psd1 
+          -Path .\ProcessTuner.psd1 
           -ModuleVersion '1.0.${{ github.run_number }}' 
           -Author '${GITHUB_WORKSPACE}' 
           -Description '${DESCRIPTION}' 
           -FunctionsToExport '*' 
-          -RootModule 'ProcessTunerCLI.psm1'"
+          -RootModule 'ProcessTuner.psm1'"
       - name: Publish
         run: pwsh -Command 'Publish-Module -Path . -NuGetApiKey ${{ secrets.NuGetApiKey }}'
