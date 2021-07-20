@@ -9,7 +9,7 @@ The tool can be helpful to restrict the number of CPUs Cores assigned for runnin
 
 # The Problem ...
 
-1. Given You're have a I5 machine as an example (4 Cores)
+1. Given you have an I5 machine as an example (4 Cores)
 
 2. The machine is running applications and services backed by processes ...
 
