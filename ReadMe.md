@@ -42,10 +42,17 @@ Install-Module ProcessTuner
 Import-Module ProcessTuner -Force
 ```
 
+# List
+
+```powershell
+Get-Module ProcessTuner
+```
+
 ## Update
 
 ```powershell
 Update-Module ProcessTuner
+Import-Module ProcessTuner -Force
 ```
 
 ## Create rules
