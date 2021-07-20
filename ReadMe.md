@@ -36,13 +36,13 @@ That mean that 100% of CPU power for that process will be only 25% of your total
 Install-Module ProcessTuner
 ```
 
-# Import
+## Import
 
 ```powershell
 Import-Module ProcessTuner -Force
 ```
 
-# List
+## List
 
 ```powershell
 Get-Module ProcessTuner
