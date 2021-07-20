@@ -3,9 +3,10 @@ Function Start-ProcessTuner{
     param (
         [Parameter(Mandatory=$false)] $Interval         = 10,
         [Parameter(Mandatory=$false)] $JobName          = "ProcessTuner",
-        [Parameter(Mandatory=$false)] [Switch] $Watch
+        [Parameter(Mandatory=$false)] [Switch] $Backgound
     )
-
+    Write-Host "Starting ..." -ForegroundColor cyan
+    
     Stop-ProcessTuner
 
     Start-Job -Name $JobName {
@@ -19,14 +20,14 @@ Function Start-ProcessTuner{
         }
         
         while ($true) {
-            if($Watch){ Clear-Host }
+            if(!$Backgound){ Clear-Host }
             Get-ProcessRules | Set-ProcessRules
             Start-Sleep -Seconds $Interval
         }
 
     } -ArgumentList $Interval, $Watch
 
-    if($Watch){
+    if(!$Backgound){
         Get-Job $JobName | Receive-Job -Wait
     }
 }
