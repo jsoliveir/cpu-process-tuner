@@ -1,7 +1,7 @@
 
 Function Start-ProcessTuner{
     param (
-        [Parameter(Mandatory=$false)] $Interval         = 10,
+        [Parameter(Mandatory=$false)] $Interval         = 3,
         [Parameter(Mandatory=$false)] $JobName          = "ProcessTuner",
         [Parameter(Mandatory=$false)] [Switch] $Backgound
     )
