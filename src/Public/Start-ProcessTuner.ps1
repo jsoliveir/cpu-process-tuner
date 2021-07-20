@@ -11,10 +11,10 @@ Function Start-ProcessTuner{
     Start-Job -Name $JobName {
         param($Interval, $Watch)
 
-        if(Get-Module ProcessTunerCLI){
-            Import-Module ProcessTunerCLI -Force -Verbose:$false
+        if(Get-Module ProcessTuner){
+            Import-Module ProcessTuner -Force -Verbose:$false
         } else {
-            Import-Module ./ProcessTunerCLI.psm1 -Force -Verbose:$false
+            Install-Module ProcessTuner -Force
         }
         
         while ($true) {
