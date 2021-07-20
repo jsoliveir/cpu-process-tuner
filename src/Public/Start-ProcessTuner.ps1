@@ -7,7 +7,7 @@ Function Start-ProcessTuner{
     )
     Write-Host "Starting ..." -ForegroundColor cyan
     
-    Stop-ProcessTuner
+    Stop-ProcessTuner | Out-Null
 
     Start-Job -Name $JobName {
         param($Interval, $Backgound)
