@@ -15,6 +15,7 @@ Function Start-ProcessTuner{
             Import-Module ProcessTuner -Force -Verbose:$false
         } else {
             Install-Module ProcessTuner -Force
+            Import-Module ProcessTuner -Force -Verbose:$false
         }
         
         while ($true) {
