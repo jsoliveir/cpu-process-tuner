@@ -9,7 +9,7 @@ The tool can be helpful to restrict the number of CPUs Cores assigned for runnin
 
 # The Problem ...
 
-1. Given you have an I5 machine as an example (4 Cores)
+1. Given you're working with a computer machine...
 
 2. The machine is running applications and services backed by processes ...
 
@@ -19,15 +19,19 @@ The tool can be helpful to restrict the number of CPUs Cores assigned for runnin
 
 ## What would you do?
 
-The first approach would be to find and kill the process but, sometimes that cannot be done.
+1. The first approach would be to find and kill the process but, sometimes that cannot be done.
 
-If the process is an Antivirus, an application running in a server you might need it running and in this case, would be really good if we could control CPU resources (priorities) for that given process. 
+2. If the process is an Antivirus, an application running in a server you might need it running and in this case, would be really good if we could control CPU resources (priorities) for that given process. 
 
 ProcessTuner allows to set CPU affinities/priorities for processes running the the operating system. 
 That means that you can isolate processes in specific CPU cores, making them slower, but letting the operating system responsive enough to work on more important tasks.
 
-For the problematic scenario above, you could use this tool to create a `Rule` for that  given process. You would set the CPU affinity to [CPU1] and priority to [Idle].
-That mean that 100% of CPU power for that process will be only 25% of your total CPU capacity and other processes that might need the [CPU1] will have higher priority in terms of tasks processing.
+For the problematic scenario above, you could use this tool to create a `Rule` for that  given process. 
+
+You would set the CPU affinity to [CPU1] and priority to [Idle].
+That mean that 100% of CPU power for that process will be only a small partial percentage of your total CPU capacity.
+
+The process will become slower but the other applications including the operating system will recover the responsiveness. :) 
 
 # How to use it
 
