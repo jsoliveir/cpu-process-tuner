@@ -16,13 +16,13 @@ jobs:
       - name: Tests
         run: pwsh -File ./Run-Tests.ps1
       - name: Versioning
-        run: |
-          pwsh -Command "New-ModuleManifest `
-          -Path ./ProcessTuner.psd1 `
-          -ModuleVersion '1.0.${{ github.run_number }}' `
-          -Author '${GITHUB_WORKSPACE}' `
-          -Description '${DESCRIPTION}' `
-          -FunctionsToExport '*' `
+        run: >
+          pwsh -Command "New-ModuleManifest 
+          -Path ./ProcessTuner.psd1 
+          -ModuleVersion '1.0.${{ github.run_number }}' 
+          -Author '${GITHUB_WORKSPACE}' 
+          -Description '${DESCRIPTION}' 
+          -FunctionsToExport '*' 
           -RootModule 'ProcessTuner.psm1'"
       - name: Publish
         run: pwsh -Command 'Move-Item * ProcessTuner/; Publish-Module -Path ProcessTuner/ -NuGetApiKey ${{ secrets.NuGetApiKey }}'
