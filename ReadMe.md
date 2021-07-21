@@ -1,6 +1,6 @@
 [![Publish](https://github.com/jsoliveir/ProcessTunerCLI/actions/workflows/publish.yml/badge.svg)](https://github.com/jsoliveir/ProcessTunerCLI/actions/workflows/tests.yml)
 # What the Process Tuner is
-> Powershell 5.0+ | Powershell Core 5.0+
+> Powershell 5.0+ | Powershell Core 7.0+
 
 ProcessTuner is a tool that manages CPU affinities and priorites for processes running in a given operating system. 
 
