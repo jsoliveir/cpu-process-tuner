@@ -110,6 +110,19 @@ or
 code $(Get-ProcessConfigFile)
 ```
 
+Config file structure
+
+
+```yaml
+rules:
+- selector: chrome
+  priority: 2
+  affinity: 3
+- selector: notepad
+  priority: 2
+  affinity: 255 #all CPUs
+```
+
 ## Check existing rules
 ```powerhell
 Get-ProcessRules
