@@ -18,7 +18,7 @@ Function Get-ProcessConfigFile {
     }
 
     if((Test-Path (Join-Path $HOME $File))){
-        return (Join-Path $HOME $File)
+        return (Join-Path $HOME $File | Get-Item)
     }
     
     return  (Join-Path (Get-Location).Path $File | Get-Item)
