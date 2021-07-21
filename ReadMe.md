@@ -145,9 +145,11 @@ CPU affinity mask calculator:
 https://bitsum.com/tools/cpu-affinity-calculator/
 
 ## Check existing rules
-```powerhell
+
+```powershell
 Get-ProcessRules
 ```
+
     selector priority         affinity
     -------- --------         --------
     chrome   RealTime CPU0, CPU1, CPU2
