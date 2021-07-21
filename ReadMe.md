@@ -62,8 +62,10 @@ Get-Module ProcessTuner
 ## Update
 
 ```powershell
-Update-Module ProcessTuner
-Import-Module ProcessTuner -Force
+Uninstall-Module ProcessTuner -AllVersions
+Remove-Module ProcessTuner
+Install-Module ProcessTuner
+Import-Module ProcessTuner
 ```
 
 ## Create rules
