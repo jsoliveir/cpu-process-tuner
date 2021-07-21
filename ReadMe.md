@@ -2,12 +2,18 @@
 # What the Process Tuner is
 > Powershell 5.0+ | Powershell Core 5.0+
 
-ProcessTuner is a tool that manages CPU priorites for processes running in a given operating system. 
+ProcessTuner is a tool that manages CPU affinities and priorites for processes running in a given operating system. 
 
-The tool can be helpful to restrict the number of CPUs Cores assigned for running processes or make some applications running on higher priorities than others.
+It basically stands for:
+
+1. Limiting CPU cores for running processes
+
+2. Managing CPU priorities for process that you use often
+
+3. Improving the operating system responsiveness
 
 
-# The Problem ...
+## A problem scenario ...
 
 1. Given you're working with a computer machine...
 
