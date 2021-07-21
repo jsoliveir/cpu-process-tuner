@@ -86,7 +86,7 @@ New-ProcessRule `
 ```
 
 ## Remove rules
-```powerhell
+```powershell
 Remove-ProcessRule `
    -Selector /system32
 
