@@ -112,16 +112,20 @@ code $(Get-ProcessConfigFile)
 
 Config file structure
 
-
 ```yaml
 rules:
-- selector: chrome
-  priority: 2
-  affinity: 3
+- selector: chrome    # proces or path
+  priority: 2         # priority value 
+  affinity: 3         # affinity mask
+  
 - selector: notepad
   priority: 2
   affinity: 255
 ```
+
+CPU priority values:
+
+https://github.com/jsoliveir/process-cpu-tuner/blob/master/src/Enum/CpuPriority.ps1
 
 CPU affinity mask values:
 
