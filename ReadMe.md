@@ -120,8 +120,16 @@ rules:
   affinity: 3
 - selector: notepad
   priority: 2
-  affinity: 255 #all CPUs
+  affinity: 255
 ```
+
+CPU affinity mask values:
+
+https://github.com/jsoliveir/process-cpu-tuner/blob/master/src/Enum/CpuAffinity.ps1
+
+CPU affinity mask calculator:
+
+https://bitsum.com/tools/cpu-affinity-calculator/
 
 ## Check existing rules
 ```powerhell
