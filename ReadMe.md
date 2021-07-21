@@ -61,10 +61,19 @@ Get-Module ProcessTuner
 
 ## Update
 
+the cleanest way
+
 ```powershell
 Uninstall-Module ProcessTuner -AllVersions
 Remove-Module ProcessTuner
 Install-Module ProcessTuner
+Import-Module ProcessTuner
+```
+
+or 
+
+```powershell
+Update-Module ProcessTuner -Force
 Import-Module ProcessTuner
 ```
 
