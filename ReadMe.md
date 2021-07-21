@@ -98,6 +98,18 @@ Import-Module ProcessTuner
        -Affinity CPU0,CPU2  `
 ```
 
+## Manage the config file
+
+```powershell
+Start-Process $(Get-ProcessConfigFile)
+```
+
+or 
+
+```powershell
+code $(Get-ProcessConfigFile)
+```
+
 ## Check existing rules
 ```powerhell
 Get-ProcessRules
