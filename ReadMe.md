@@ -70,32 +70,32 @@ Import-Module ProcessTuner
 
 ## Create rules
 ```powershell
-    New-ProcessRule `
-      -Selector /system32 `
-      -Priority High
+New-ProcessRule `
+  -Selector /system32 `
+  -Priority High
 
-    New-ProcessRule `
-       -Affinity CPU0,CPU1,CPU2 `
-       -Priority BelowNormal `
-       -Selector notepad  `
-    
-    New-ProcessRule `
-       -Affinity CPU5,CPU6,CPU7 `
-       -Priority AboveNormal 
-       -Selector chrome  `
+New-ProcessRule `
+   -Affinity CPU0,CPU1,CPU2 `
+   -Priority BelowNormal `
+   -Selector notepad  
+
+New-ProcessRule `
+   -Affinity CPU5,CPU6,CPU7 `
+   -Priority AboveNormal `
+   -Selector chrome  
 ```
 
 ## Remove rules
 ```powerhell
-    Remove-ProcessRule `
-       -Selector /system32
-      
-    Remove-ProcessRule `
-       -Priority High
+Remove-ProcessRule `
+   -Selector /system32
 
-    Remove-ProcessRule `
-       -Selector /system32  `
-       -Affinity CPU0,CPU2  `
+Remove-ProcessRule `
+   -Priority High
+
+Remove-ProcessRule `
+   -Selector /system32  `
+   -Affinity CPU0,CPU2  
 ```
 
 ## Manage Rules thru the config file
