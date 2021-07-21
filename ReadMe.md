@@ -114,7 +114,7 @@ Config file structure
 
 ```yaml
 rules:
-- selector: chrome    # proces or path
+- selector: chrome    # process or path (regex)
   priority: 2         # priority value 
   affinity: 3         # affinity mask
   
