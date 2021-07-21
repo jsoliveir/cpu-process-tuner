@@ -94,7 +94,7 @@ Remove-ProcessRule `
    -Priority High
 
 Remove-ProcessRule `
-   -Selector /system32  `
+   -Selector /system32 `
    -Affinity CPU0,CPU2  
 ```
 
@@ -122,24 +122,24 @@ Get-ProcessRules
 
 ## Apply the rules once (testing)
 
-``` powershell
+```powershell
 Get-ProcessRules | Set-ProcessRules
 ```
 
 ## Start auto management (attached)
-``` powershell
+```powershell
 Start-ProcessTuner 
 ```
 
 ## Start auto management (background / dettached)
 
-``` powershell
+```powershell
 Start-ProcessTuner -Background
 ```
 
 ## Extra args
 
-``` powershell
+```powershell
 Start-ProcessTuner `
     -RulesPath rules/example.yml `
     -Interval 10 `
@@ -150,12 +150,12 @@ Start-ProcessTuner `
 
 ## Check the logs (background)
 
-``` powershell
+```powershell
 Get-Job ProcessTuner | Receive-Job -Keep
 ```
 
 ## Attach to the job (realtime)
-``` powershell
+```powershell
 Get-Job ProcessTuner | Receive-Job -Wait
 ```
 
@@ -167,15 +167,15 @@ Get-Job ProcessTuner | Receive-Job -Wait
 
 ## Hide/Minimize current the console window
 
-``` powershell
+```powershell
 Set-WindowStyle -Style MINIMIZE
 ```
 
-``` powershell
+```powershell
 Set-WindowStyle -Style MAXIMIZE
 ```
 
-``` powershell
+```powershell
 Set-WindowStyle -Style SHOWDEFAULT
 ```
 
